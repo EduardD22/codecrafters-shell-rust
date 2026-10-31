@@ -17,6 +17,13 @@ fn main() {
         match program {
             "exit" => break,
             "echo" => println!("{}", args.join(" ")),
+            "type" => {
+                let name = args[0];
+                match name {
+                    "exit" | "echo" | "type" => println!("{} is a shell builtin", name),
+                    _ => println!("{}: not found", name),
+                }
+            },
             _ => println!("{}: command not found", command),
         }
     }
