@@ -18,7 +18,10 @@ fn main() {
             "exit" => break,
             "echo" => println!("{}", args.join(" ")),
             "type" => {
-                let name = args[0];
+                let Some(&name) = args.first() else {
+                    eprintln!("type: missing argument");
+                    continue;
+                };
                 match name {
                     "exit" | "echo" | "type" => println!("{} is a shell builtin", name),
                     _ => println!("{}: not found", name),
